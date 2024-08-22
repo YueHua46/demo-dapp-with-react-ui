@@ -37,7 +37,7 @@ export function TxForm() {
         stateInit:
           "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
         // （可选）boc base64 格式的有效负载.
-        payload,
+        payload: "gqR4bWw=",
       },
 
       // 取消注释以下消息以在一个事务中发送两条消息
