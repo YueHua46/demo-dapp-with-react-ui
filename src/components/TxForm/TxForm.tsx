@@ -41,7 +41,7 @@ const defaultTx: SendTransactionRequest = {
       // 以 nanoTON 形式发送的金额。例如，0.005 TON 等于 5000000 nanoTON
       amount: toNano("0.005").toString(),
       // （可选）boc base64 格式的有效负载.
-      payload: transactionComment("Hello, TON!"),
+      payload: transactionComment("Hello,TON!"),
     },
   ],
 };
