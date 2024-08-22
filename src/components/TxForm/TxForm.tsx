@@ -11,9 +11,7 @@ import {
 import { address, beginCell, toNano } from "@ton/core";
 
 const payload = beginCell()
-  .storeUint(260734629, 32)
   .storeCoins(toNano("0.005"))
-  .storeAddress(address("0QCSES0TZYqcVkgoguhIb8iMEo4cvaEwmIrU5qbQgnN8fo2A"))
   .storeStringTail("Hello!~~~")
   .endCell()
   .toBoc()
@@ -37,7 +35,7 @@ export function TxForm() {
         stateInit:
           "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
         // （可选）boc base64 格式的有效负载.
-        payload: "gqR4bWw=",
+        payload: payload,
       },
 
       // 取消注释以下消息以在一个事务中发送两条消息
@@ -50,6 +48,7 @@ export function TxForm() {
     */
     ],
   };
+  console.log("payload", payload);
 
   const [tx, setTx] = useState(defaultTx);
   const userAddr = useTonAddress();
