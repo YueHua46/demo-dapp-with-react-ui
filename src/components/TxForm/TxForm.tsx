@@ -6,30 +6,31 @@ import {
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
+import { toNano } from "@ton/core";
 
-// In this example, we are using a predefined smart contract state initialization (`stateInit`)
-// to interact with an "EchoContract". This contract is designed to send the value back to the sender,
-// serving as a testing tool to prevent users from accidentally spending money.
+// 在此示例中，我们使用预定义的智能合约状态初始化 (`stateInit`)
+// 与“EchoContract”交互。该合约旨在将价值发送回发送者，
+// 作为测试工具，防止用户意外花钱
 const defaultTx: SendTransactionRequest = {
   // The transaction is valid for 10 minutes from now, in unix epoch seconds.
   validUntil: Math.floor(Date.now() / 1000) + 600,
   messages: [
     {
-      // The receiver's address.
+      // 收件人地址。
       address: "0QCSES0TZYqcVkgoguhIb8iMEo4cvaEwmIrU5qbQgnN8fo2A",
-      // Amount to send in nanoTON. For example, 0.005 TON is 5000000 nanoTON.
-      amount: "5000000",
-      // (optional) State initialization in boc base64 format.
+      // 以 nanoTON 形式发送的金额。例如，0.005 TON 等于 5000000 nanoTON
+      amount: toNano("0.005").toString(),
+      // （可选）boc base64 格式的状态初始化
       stateInit:
         "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
-      // (optional) Payload in boc base64 format.
-      payload: "te6ccsEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==",
+      // （可选）boc base64 格式的有效负载.
+      payload: "SGVsbG8gV29ybGQgfn5+",
     },
 
-    // Uncomment the following message to send two messages in one transaction.
+    // 取消注释以下消息以在一个事务中发送两条消息
     /*
     {
-      // Note: Funds sent to this address will not be returned back to the sender.
+      // 注意：发送到该地址的资金将不会退还给发送者。
       address: 'UQAuz15H1ZHrZ_psVrAra7HealMIVeFq0wguqlmFno1f3B-m',
       amount: toNano('0.01').toString(),
     }
