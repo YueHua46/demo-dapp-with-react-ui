@@ -23,6 +23,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-json-view": "^1.21.3",
+    "tonweb": "^0.0.66",
     "zod": "^3.23.8"
   },
   "devDependencies": {
