@@ -12,10 +12,7 @@ import { beginCell, Cell, toNano } from "@ton/core";
 import { useTonConnect } from "../../hooks/useTonConnect";
 
 const transactionComment = (text: string) => {
-  const cell = beginCell()
-    .storeUint(0x00000000, 32)
-    .storeStringTail(text)
-    .endCell();
+  const cell = beginCell().storeUint(0, 32).storeStringTail(text).endCell();
 
   const boc = cell.toBoc();
   return boc.toString("base64");
