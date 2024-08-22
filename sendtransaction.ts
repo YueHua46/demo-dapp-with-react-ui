@@ -15,53 +15,53 @@ async function sendTransaction({
   repeat?: number;
   interval?: number;
 }) {
-  // if (tonConnectUI === undefined)
-  //   throw new Error("wallet connect is not initialized");
-  // if (!comment || comment.length === 0) {
-  //   comment = `${Date.now()}`;
-  // }
-  // const toRealAddress = await getContractAddress(toAddress);
-  // const realAddress = await getContractAddress(
-  //   tonConnectUI?.wallet?.account?.address
-  // );
-  // const conRealAddress = await getContractAddress(realAddress, contractAddress);
-  // let payload = beginCell();
-  // const transaction = {
-  //   validUntil: Math.floor(Date.now() / 1000) + 360,
-  // };
-  // if (contractAddress) {
-  //   payload = payload
-  //     .storeUint(0xf8a7ea5, 32)
-  //     .storeUint(0, 64)
-  //     .storeCoins(toNano(amount))
-  //     .storeAddress(toRealAddress)
-  //     .storeAddress(realAddress)
-  //     .storeUint(0, 1)
-  //     .storeCoins(toNano(0.01))
-  //     .storeUint(0, 1)
-  //     .storeUint(0, 32)
-  //     .storeStringTail(`${comment}`)
-  //     .endCell()
-  //     .toBoc()
-  //     .toString("base64");
-  // } else {
-  //   payload = payload
-  //     .storeUint(0, 32)
-  //     .storeStringTail(comment)
-  //     .endCell()
-  //     .toBoc()
-  //     .toString("base64");
-  // }
-  // transaction.messages = [
-  //   {
-  //     address: conRealAddress.toString(),
-  //     amount: toNano(contractAddress ? gasFee : amount).toString(),
-  //     payload,
-  //   },
-  // ];
-  // // 发送
-  // const ddd = tonConnectUI.sendTransaction(transaction);
-  // console.log("boc", JSON.stringify(ddd));
+  if (tonConnectUI === undefined)
+    throw new Error("wallet connect is not initialized");
+  if (!comment || comment.length === 0) {
+    comment = `${Date.now()}`;
+  }
+  const toRealAddress = await getContractAddress(toAddress);
+  const realAddress = await getContractAddress(
+    tonConnectUI?.wallet?.account?.address
+  );
+  const conRealAddress = await getContractAddress(realAddress, contractAddress);
+  let payload = beginCell();
+  const transaction = {
+    validUntil: Math.floor(Date.now() / 1000) + 360,
+  };
+  if (contractAddress) {
+    payload = payload
+      .storeUint(0xf8a7ea5, 32)
+      .storeUint(0, 64)
+      .storeCoins(toNano(amount))
+      .storeAddress(toRealAddress)
+      .storeAddress(realAddress)
+      .storeUint(0, 1)
+      .storeCoins(toNano(0.01))
+      .storeUint(0, 1)
+      .storeUint(0, 32)
+      .storeStringTail(`${comment}`)
+      .endCell()
+      .toBoc()
+      .toString("base64");
+  } else {
+    payload = payload
+      .storeUint(0, 32)
+      .storeStringTail(comment)
+      .endCell()
+      .toBoc()
+      .toString("base64");
+  }
+  transaction.messages = [
+    {
+      address: conRealAddress.toString(),
+      amount: toNano(contractAddress ? gasFee : amount).toString(),
+      payload,
+    },
+  ];
+  // 发送
+  const ddd = tonConnectUI.sendTransaction(transaction);
+  console.log("boc", JSON.stringify(ddd));
 
   // let transCount = 0
   // const c = await client()

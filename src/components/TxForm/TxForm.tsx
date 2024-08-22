@@ -11,7 +11,6 @@ import {
 import { address, beginCell, toNano } from "@ton/core";
 
 const payload = beginCell()
-  .storeCoins(toNano("0.005"))
   .storeStringTail("Hello!~~~")
   .endCell()
   .toBoc()
