@@ -11,13 +11,23 @@ import {
 import { beginCell, Cell, toNano } from "@ton/core";
 import { useTonConnect } from "../../hooks/useTonConnect";
 
+const transactionComment = (text: string) => {
+  const cell = beginCell()
+    .storeUint(0x00000000, 32)
+    .storeStringTail(text)
+    .endCell();
+
+  const boc = cell.toBoc();
+  return boc.toString("base64");
+};
+
 // 交易有效负载
-const payload = beginCell()
-  .storeUint(0x00000000, 32)
-  .storeStringTail("Hello, TON!")
-  .endCell()
-  .toBoc()
-  .toString("base64");
+// const payload = beginCell()
+//   .storeUint(0x00000000, 32)
+//   .storeStringTail("Hello, TON!")
+//   .endCell()
+//   .toBoc()
+//   .toString("base64");
 
 // 默认交易配置
 const defaultTx: SendTransactionRequest = {
@@ -31,11 +41,11 @@ const defaultTx: SendTransactionRequest = {
       // 以 nanoTON 形式发送的金额。例如，0.005 TON 等于 5000000 nanoTON
       amount: toNano("0.005").toString(),
       // （可选）boc base64 格式的有效负载.
-      payload,
+      payload: transactionComment("Hello, TON!"),
     },
   ],
 };
-console.log("payload", payload);
+console.log("payload", transactionComment("Hello, TON!"));
 
 export function TxForm() {
   const { sender, connected } = useTonConnect();
